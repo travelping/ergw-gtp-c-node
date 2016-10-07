@@ -1,3 +1,9 @@
+ergw-gtp-c-node (0.1.0-1) unstable; urgency=medium
+
+  * upgrade gtplib for empty MS-ISDN fix
+
+ -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 15:14:16 +0200
+
 ergw-gtp-c-node (0.1.0-0) unstable; urgency=medium
 
   * make vm.args and sys.config proper conffiles
