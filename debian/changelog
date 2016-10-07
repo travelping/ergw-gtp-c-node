@@ -1,10 +1,11 @@
-ergw-gtp-c-node (0.1.0~ppa3) UNRELEASED; urgency=medium
+ergw-gtp-c-node (0.1.0~ppa3) unstable; urgency=medium
 
   * upgrade gtplib for missing ppp dependency
   * make pre-start.sh executable
   * strip source from release
+  * adjust Erlang cookie default to match GTP-u node
 
- -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 11:22:34 +0200
+ -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 11:31:29 +0200
 
 ergw-gtp-c-node (0.1.0~ppa2) unstable; urgency=medium
 

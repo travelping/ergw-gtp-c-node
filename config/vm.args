@@ -1,6 +1,6 @@
 -sname ergw-gtp-c-node
 
--setcookie ergw-gtp-c-node_cookie
+-setcookie ergw-gtp-secret-cookie
 
 +K true
 +A30
