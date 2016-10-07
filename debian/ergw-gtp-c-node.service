@@ -1,12 +1,14 @@
 [Unit]
 Description=session
 After=multi-user.target
+After=ergw-gtp-u-node.service
+Requires=ergw-gtp-u-node.service
 
 [Service]
 ExecStartPre=-/etc/ergw-gtp-c-node/pre-start.sh
 ExecStart=/usr/bin/ergw-gtp-c-node foreground
 Type=simple
-Environment="HOME=/home/root"
+Environment="HOME=/root"
 Restart=always
 
 [Install]

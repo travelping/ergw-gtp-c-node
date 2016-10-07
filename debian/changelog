@@ -1,8 +1,9 @@
-ergw-gtp-c-node (0.1.0-0) UNRELEASED; urgency=medium
+ergw-gtp-c-node (0.1.0-0) unstable; urgency=medium
 
   * make vm.args and sys.config proper conffiles
+  * fix systemd service file
 
- -- Andreas Schultz <aschultz@alice>  Fri, 07 Oct 2016 12:29:57 +0200
+ -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 12:34:59 +0200
 
 ergw-gtp-c-node (0.1.0~ppa3) unstable; urgency=medium
 
