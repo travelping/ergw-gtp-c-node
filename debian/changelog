@@ -2,6 +2,7 @@ ergw-gtp-c-node (0.1.0~ppa3) UNRELEASED; urgency=medium
 
   * upgrade gtplib for missing ppp dependency
   * make pre-start.sh executable
+  * strip source from release
 
  -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 11:22:34 +0200
 
