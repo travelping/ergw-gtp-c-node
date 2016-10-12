@@ -1,3 +1,15 @@
+ergw-gtp-c-node (0.1.0-3) unstable; urgency=medium
+
+  * upgrade ergw for new AAA config options
+
+ -- Andreas Schultz <aschultz@warp10.net>  Wed, 12 Oct 2016 17:47:11 +0200
+
+ergw-gtp-c-node (0.1.0-2) unstable; urgency=medium
+
+  * upgrade ergw for APN and QoS IE fixes
+
+ -- Andreas Schultz <aschultz@warp10.net>  Fri, 07 Oct 2016 17:13:41 +0200
+
 ergw-gtp-c-node (0.1.0-1) unstable; urgency=medium
 
   * upgrade gtplib for empty MS-ISDN fix
