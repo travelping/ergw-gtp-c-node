@@ -1,3 +1,9 @@
+ergw-gtp-c-node (0.1.0-4) unstable; urgency=medium
+
+  * QoS Allocation/Retention Priority handling
+
+ -- Andreas Schultz <aschultz@warp10.net>  Thu, 13 Oct 2016 10:55:49 +0200
+
 ergw-gtp-c-node (0.1.0-3) unstable; urgency=medium
 
   * upgrade ergw for new AAA config options
