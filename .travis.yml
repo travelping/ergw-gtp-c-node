@@ -1,0 +1,34 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+env:
+  global:
+    - BINTRAY_USER=roadrunnr
+    - secure: "GfmXopv/Yqc5C85+Iv5vUn7/o9IWyHyLqnSK3j5YNSFik6OhnuUsy6/fVoBxOymRNyaKaxo4PgayBD0ABqj5PS49fBGjWarHeVOGzM9+ZRx82YYCFSWNC3x5BZq8CkiDaMgruwX5JnDF5qSFZ444iQXs5rANsau6NCGxT3K/CTi415yLPxRfcuAsKt4ouluo9MQbQvIziulDw1BlWQCcGQYEcFVh99u1sSErBWbVqw6H1Rj6Vq7kCfrcnkaeR0BHd64XBQQMfoh83eb5Swfavxu5inNDiR1rBBxs7YItyBrMHdISMTO+oPXemCs9CN8R44K589gcj9IwJD1YO6GChf4nOmckItIRW7Rop8+jtclHB1vc10jwOYO0pBMjzz6+EGQSd716esAkudy56Ys3iVX0Xlri6qaPCIpWOmQw815eThZhXogMuCU2U2CTnyUrlzOFlKJfGWh8V+hgnYX5t0xWaX6hWAZula8U4qOaSI8R2kJugU5OIgaKV6TAWEK52kGXmliC8DAXleeSBv9lFuzkeQ7RVwPMxNM5eOPrkWsvgz94YzPiC/9M7jhjT6GH/lUrMdY6ZPcWNsiCWcdToQ0ayCY14w4Qwsy/dBYGWGFg1DceEGQIlItgqx5oEHg5nwOuyt8yOkcYa2JpYQimtammiHDaYgwMMsqVAK3x36I="
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y devscripts
+  - docker build -t ergw -f priv/Dockerfile priv
+
+script:
+  - export SHORT_COMMIT_ID=$(git rev-parse --verify --short $TRAVIS_COMMIT)
+  - debchange -m -l "+$TRAVIS_JOB_NUMBER+git$SHORT_COMMIT_ID" 'Automatically built'
+  - mkdir artifacts
+  - docker run -v `pwd`:/build ergw
+    sh -c "
+      dpkg-buildpackage -b -uc && cp ../*deb artifacts
+    "
+
+after_success:
+  - priv/upload_bintray.sh
+  - echo "Done"
+
+notifications:
+  email: false
+
+branches:
+  only:
+    - master
