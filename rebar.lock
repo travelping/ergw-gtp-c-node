@@ -64,7 +64,7 @@
   2},
  {<<"netdata">>,
   {git,"https://github.com/RoadRunnr/erl_netdata.git",
-       {ref,"8a4a4ba4f3725fa0d926d54f39f61366e2a20630"}},
+       {ref,"cbd6eaf304d6ef9d0c659abb1b37de18f1aac45f"}},
   1},
  {<<"parse_trans">>,
   {git,"git://github.com/uwiger/parse_trans.git",
