@@ -1,3 +1,11 @@
+ergw-gtp-c-node (1.2.0-0) unstable; urgency=medium
+
+  * New upstream release
+  * AAA support for S5/S8
+  * fix IP pools
+
+ -- Andreas Schultz <aschultz@warp10.net>  Thu, 27 Oct 2016 17:30:38 +0200
+
 ergw-gtp-c-node (1.1.0-0) unstable; urgency=medium
 
   * New upstream release
