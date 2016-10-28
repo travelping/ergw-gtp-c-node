@@ -1,3 +1,9 @@
+ergw-gtp-c-node (1.2.1-0) unstable; urgency=medium
+
+  * add JSON data source for proxy mappings
+
+ -- Andreas Schultz <aschultz@warp10.net>  Fri, 28 Oct 2016 14:06:46 +0200
+
 ergw-gtp-c-node (1.2.0-0) unstable; urgency=medium
 
   * New upstream release
