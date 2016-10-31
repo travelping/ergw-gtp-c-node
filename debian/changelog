@@ -1,3 +1,9 @@
+ergw-gtp-c-node (1.2.1-1) unstable; urgency=medium
+
+  * fix JSON DS application module
+
+ -- Andreas Schultz <aschultz@warp10.net>  Mon, 31 Oct 2016 11:11:37 +0100
+
 ergw-gtp-c-node (1.2.1-0) unstable; urgency=medium
 
   * add JSON data source for proxy mappings

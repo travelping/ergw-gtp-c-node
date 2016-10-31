@@ -26,7 +26,7 @@
   1},
  {<<"ergw_proxy_ds_json">>,
   {git,"git://github.com/travelping/ergw_proxy_ds_json",
-       {ref,"71301c0e44cc2f1696e686616db7f0da95f382b3"}},
+       {ref,"aef5df67f55224fe869820d6d7c936cf412be3e1"}},
   0},
  {<<"erlando">>,
   {git,"https://github.com/travelping/erlando.git",
