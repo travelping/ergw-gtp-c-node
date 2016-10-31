@@ -54,7 +54,7 @@
   2},
  {<<"gtplib">>,
   {git,"https://github.com/travelping/gtplib.git",
-       {ref,"4dd251c50c83893d7859d142e02f583519dd2be9"}},
+       {ref,"38473b77733c454d1845a7a77ce094242c572576"}},
   1},
  {<<"hackney">>,
   {git,"https://github.com/benoitc/hackney.git",
