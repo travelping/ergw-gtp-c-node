@@ -1,3 +1,9 @@
+ergw-gtp-c-node (1.2.1-2) unstable; urgency=medium
+
+  * build releases with debug information
+
+ -- Andreas Schultz <aschultz@warp10.net>  Mon, 31 Oct 2016 12:08:49 +0100
+
 ergw-gtp-c-node (1.2.1-1) unstable; urgency=medium
 
   * fix JSON DS application module
