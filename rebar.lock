@@ -18,7 +18,7 @@
   2},
  {<<"ergw">>,
   {git,"git://github.com/travelping/ergw",
-       {ref,"c88b9639d4d6313afa4cf6da53950c44857bd06f"}},
+       {ref,"ac61960622001c6b88e2fc2b50057783618be026"}},
   0},
  {<<"ergw_aaa">>,
   {git,"git://github.com/travelping/ergw_aaa",
