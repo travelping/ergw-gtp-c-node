@@ -3,15 +3,19 @@ sudo: required
 services:
   - docker
 
-deploy:
-  provider: packagecloud
-  repository: "ci"
-  username: "ergw"
-  token:
-    secure: "jciqqnTbp+Yfh6bmrdfaNRWjOTtTrApZuPSoWdtmGXseA0nCbqYBQ3zeIxkghUN0hcbRaDOcg5vJ1XsuZdr4t88OjVIfHz160EpX1dh2i9yxSZQ6gObtq9DDNEa3JxC61Pu+k4y1aTuQOycrh4K+8+xzns6pD08eaXG/Kfes+hKyc2ByAyZ1irvGUaiyG5lh5N/OAlkx4OT79RfzHVWk8JjBLjLU8ajGtXYxpJwcv78PAaUzZcpJG8GDQ7vJ3JSEuAxR8MnI00/g3ZHa5+6iEN29PkUNr1XnCQlDcD4kJiN3D11cJ5stsa3yqtUvRfiJj1HeKrvh7vvBXwDADttuyxEiO2Q3RT1nYgVtKU3fvPR+o3fti0gECA+9pRMooCYZkmQb5YfH4a/zSvRH2/mwzmXhBZLXDwL/mVpwBBXGT/1wAMsRoQrKyu8Gzm+HU+NesuwcKwNQpFFq1KYu69gSQwGx53eNystOo2khOOOBw70pNBjc8E3oq+uISSB5awcp8ofQDFiSeYtTOPW/hjqocv9AHF6fhyAfrXozN3PDVOYplceNEOhJYAl9/WL5iYno7RhoO2Im8VJ4klCekSwUfAILVPvU+NlW5Fyvyd1h+BLaaI0/rQvtamatOk2sm45cfYt9IQtuNEhaIqW8in+/52c3sUAxcY3LoTuWDX772Kw="
-  dist: "ubuntu/xenial"
-  skip_cleanup: true
-  package_glob: artifacts/*.deb
+#deploy:
+  #provider: packagecloud
+  #repository: "ci"
+  #username: "ergw"
+  #token:
+    #secure: "jciqqnTbp+Yfh6bmrdfaNRWjOTtTrApZuPSoWdtmGXseA0nCbqYBQ3zeIxkghUN0hcbRaDOcg5vJ1XsuZdr4t88OjVIfHz160EpX1dh2i9yxSZQ6gObtq9DDNEa3JxC61Pu+k4y1aTuQOycrh4K+8+xzns6pD08eaXG/Kfes+hKyc2ByAyZ1irvGUaiyG5lh5N/OAlkx4OT79RfzHVWk8JjBLjLU8ajGtXYxpJwcv78PAaUzZcpJG8GDQ7vJ3JSEuAxR8MnI00/g3ZHa5+6iEN29PkUNr1XnCQlDcD4kJiN3D11cJ5stsa3yqtUvRfiJj1HeKrvh7vvBXwDADttuyxEiO2Q3RT1nYgVtKU3fvPR+o3fti0gECA+9pRMooCYZkmQb5YfH4a/zSvRH2/mwzmXhBZLXDwL/mVpwBBXGT/1wAMsRoQrKyu8Gzm+HU+NesuwcKwNQpFFq1KYu69gSQwGx53eNystOo2khOOOBw70pNBjc8E3oq+uISSB5awcp8ofQDFiSeYtTOPW/hjqocv9AHF6fhyAfrXozN3PDVOYplceNEOhJYAl9/WL5iYno7RhoO2Im8VJ4klCekSwUfAILVPvU+NlW5Fyvyd1h+BLaaI0/rQvtamatOk2sm45cfYt9IQtuNEhaIqW8in+/52c3sUAxcY3LoTuWDX772Kw="
+  #dist: "ubuntu/xenial"
+  #skip_cleanup: true
+  #package_glob: artifacts/*.deb
+
+env:
+  global:
+    - BUILD_IMAGE="grundrausch3n/ergw-gtp-c-node-base"
 
 before_install:
   - sudo apt-get -qq update
@@ -24,13 +28,20 @@ script:
   - mkdir artifacts
   - docker run -v `pwd`:/build ergw
     sh -c "
-      dpkg-buildpackage -b -uc && cp ../*deb artifacts
+      dpkg-buildpackage -b -uc -nc && cp ../*deb artifacts
     "
+  - docker build -t $BUILD_IMAGE -f docker/Dockerfile . 
 
-notifications:
-  slack:
-    - secure: "cXUINZF8EN0aE896uS+bB+beV4qmnhVRY1T3CXpkxWUQ/tPkvX5tWsyp87XEOUJBACxNAqn6LJoOVVP7/86CS8Ry8eBt5WJTdx3y+frUyKEz6iv2cX2ULhQ61u8YMGydTo+rMkoxyxMbHN5LM+PjmTOzDnByrjPP2u70t+93x9AZrxbgmNREHCvLV9kQEXLQbRTTbEQxOOP0+acNvanNNfpqSaprTfMmsGoetHNKmSiaMuf5iixvV47FHDfrOGeZ5jk+JgnRiHsRH7oq1rLu16gUmM3Jvj84TgdfTFiLrXFOqW26g6/fvuNwlzP2tvLTOPTJElE0/3xYVSxFoNhfA2+V77S11PwQR0rdrEmT64kNI6UKk9CuEeNdIkx0uCWz/5+ahvEaPB/nqB5/wJYZsDbipmng6zXzS7FXkY3hBbUdyoMAUtEYKPx6zg/VJZ4yUgmpvoTgY9IeR0/1Sv1RsyVu/SPWS+x7uO4TyMcVIDx07PNuW4gqfu9k7j57lMtfeu7FBjHlN8KfckLSehCN/+yKtzER5rIH1pKrdVRJLpWy4ny0Hpx4kZZKTIknZF0GRZTpcyyiNUqf+8vgpGZPQsxvT6xut7PGMockSKM8SPEhXalTBmbJRtkm7CdDxD2AgfSEuORWZE1eFMQjn2iah2uOTUd3YOddiRL6ptRL85s="
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker push $BUILD_IMAGE 
+  - echo "docker push done"
 
-branches:
-  only:
-    - master
+
+#notifications:
+  #slack:
+    #- secure: "cXUINZF8EN0aE896uS+bB+beV4qmnhVRY1T3CXpkxWUQ/tPkvX5tWsyp87XEOUJBACxNAqn6LJoOVVP7/86CS8Ry8eBt5WJTdx3y+frUyKEz6iv2cX2ULhQ61u8YMGydTo+rMkoxyxMbHN5LM+PjmTOzDnByrjPP2u70t+93x9AZrxbgmNREHCvLV9kQEXLQbRTTbEQxOOP0+acNvanNNfpqSaprTfMmsGoetHNKmSiaMuf5iixvV47FHDfrOGeZ5jk+JgnRiHsRH7oq1rLu16gUmM3Jvj84TgdfTFiLrXFOqW26g6/fvuNwlzP2tvLTOPTJElE0/3xYVSxFoNhfA2+V77S11PwQR0rdrEmT64kNI6UKk9CuEeNdIkx0uCWz/5+ahvEaPB/nqB5/wJYZsDbipmng6zXzS7FXkY3hBbUdyoMAUtEYKPx6zg/VJZ4yUgmpvoTgY9IeR0/1Sv1RsyVu/SPWS+x7uO4TyMcVIDx07PNuW4gqfu9k7j57lMtfeu7FBjHlN8KfckLSehCN/+yKtzER5rIH1pKrdVRJLpWy4ny0Hpx4kZZKTIknZF0GRZTpcyyiNUqf+8vgpGZPQsxvT6xut7PGMockSKM8SPEhXalTBmbJRtkm7CdDxD2AgfSEuORWZE1eFMQjn2iah2uOTUd3YOddiRL6ptRL85s="
+
+#branches:
+  #only:
+    #- master
