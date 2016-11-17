@@ -1,10 +1,12 @@
 FROM ubuntu:xenial
 
+RUN apt-get update && apt-get -y install curl apt-transport-https
+
 RUN echo "deb http://ppa.launchpad.net/ergw/xenial/ubuntu xenial main" > /etc/apt/sources.list.d/ergw-xenial-ppa.list
-RUN echo "deb http://dl.bintray.com/roadrunnr/ergw xenial main" > /etc/apt/sources.list.d/ergw-xenial-bintray.list
+RUN echo "deb https://packagecloud.io/ergw/ci/ubuntu/ xenial main" > /etc/apt/sources.list.d/ergw-packagecloud.list
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58A14C3D
-RUN apt-key adv --keyserver pool.sks-keyservers.net --recv-keys 379CE192D401AB61
+RUN curl -L https://packagecloud.io/ergw/ci/gpgkey | apt-key add -
 
 RUN apt-get update && apt-get -y install build-essential debhelper \
     git rebar3 erlang-base-hipe erlang-dev erlang-tools \
