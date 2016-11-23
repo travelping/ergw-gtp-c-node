@@ -21,3 +21,20 @@ Build
 -----
 
     $ rebar3 compile
+
+
+Docker container images
+------------------------
+
+This repository creates also a [Docker image](https://hub.docker.com/r/grundrausch3n/ergw-gtp-c-node-base/) which can be used as a base component to create several differnt architechtures.
+At the time of writing we recommend to use it just for testing and
+development.
+It uses the host network for now and needs network interfaces to be configured
+beforehand.
+
+To add the custom configuration to the container, a volume should be mounted
+to `/config/ergw-gtp-c-node` containing the `sys.config` and `vm.args` erlang
+config.
+
+An example can be found at
+<https://github.com/travelping/ergw-gtp-c-node-docker>
