@@ -1,3 +1,4 @@
+# Dockerfile can be found at https://github.com/travelping/ergw-docker-base
 FROM grundrausch3n/ergw-docker-base
 
 WORKDIR /
