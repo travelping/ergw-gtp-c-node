@@ -9,6 +9,12 @@
 # the ~/.erlang.cookie file, for example).
 -setcookie ergw-gtp-secret-cookie
 
+# Force the use of the smp beam runtime. The binary packages are HiPE compiled
+# for the smp runtime. In order to reap the HiPE benefits, we have to use the
+# same runtime. On systems (VMs) with only one CPU, the default runtime would
+# be the none smp version.
+-smp
+
 # Use kernel poll functionality if supported by emulator
 +K true
 
