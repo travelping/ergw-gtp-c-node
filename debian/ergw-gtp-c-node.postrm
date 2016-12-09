@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ -n "$2" ]; then
+   oldversion=${2%%-*}
+   dpkg-maintscript-helper mv_conffile \
+	/opt/ergw-gtp-c-node/releases/$oldversion/sys.config \
+	/etc/ergw-gtp-c-node/ergw-gtp-c-node.config 1.4.0-0 -- "$@"
+fi
+
+#DEBHELPER#

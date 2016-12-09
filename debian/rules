@@ -25,7 +25,6 @@ override_dh_auto_install:
 	mkdir debian/ergw-gtp-c-node
 	cp -a _build/prod+native/rel debian/ergw-gtp-c-node/opt
 	echo "/opt/ergw-gtp-c-node/releases/${DEB_VERSION_UPSTREAM}/vm.args" > debian/ergw-gtp-c-node.conffiles
-	echo "/opt/ergw-gtp-c-node/releases/${DEB_VERSION_UPSTREAM}/sys.config" >> debian/ergw-gtp-c-node.conffiles
 
 override_dh_auto_clean:
 	rebar3 clean -a
