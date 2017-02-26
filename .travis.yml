@@ -13,6 +13,12 @@ deploy:
   skip_cleanup: true
   package_glob: artifacts/*.deb
 
+env:
+  global:
+    - BUILD_IMAGE="ergw/ergw-gtp-c-node"
+    - DOCKER_USERNAME="ergwci"
+    - secure: "dWQgAWw3Z9Yw4L/W9v8nRG1a6LgGzkko8E8PDEFhaHeVl41woB7+bzuydpSs9whdjkwyIzUspCrt5G8s1qUW9w/anoyWYgKZ3PRfEJM5x6+kO/zcJR5n2hzwcKXcPVJSitc864gQJOdO87Rm6sLGtL/fQT/fo15SxZUsQgwF5kRASe0+iKpCo7/lvqjw8q95Qpeadc9+3hM7yPr9rVWLkHK9rczL9QjPqwVOHJdlQEjrdMpopzNmPLTegiFodaxL5m85stCS8Sqd/CxgVw2B8Uz0VqRO4vWR9Rh6tsggtRQEqCNHI+NgzUW1jBCEoAYNZQVMdbBBLrUwd8Hj38Z6SKRtjpd2VNaXxERj2nIiqQHDoSIM4ObQcYqt5P4StFa8e5u5Ukl7e3IACstjKWDvgZly1SwdCV5YK0HIYMMX/lnHnO1no92/dMB9eOM+PnDI/DsQhF6nuCYGF1hyBHutuAlDoPJE5MX82g30ZCSYpsspoHxIukE8oboUx0yMhcFFDcJ3WqbDWlZvXYr7abmhIrqQmStQoWHUk4svTuH8y4+ZLb2cywHZ1wZOhBUqPyvh2AjH1YeFMIl72fuUvOjz5CKYjzCzQ3geEpyyMCU10kGIPMNf4sTMlk4ILIabFixniTk8ZFLwAcoduR8PK6psWdcaHtEw+GwjuITcHW6szVo="
+
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y devscripts
@@ -24,8 +30,18 @@ script:
   - mkdir artifacts
   - docker run -v `pwd`:/build ergw
     sh -c "
-      dpkg-buildpackage -b -uc && cp ../*deb artifacts
+      dpkg-buildpackage -b -uc -nc && cp ../*deb artifacts
     "
+  - docker build -t $BUILD_IMAGE -f docker/Dockerfile . 
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - export TAG=`if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ]; then echo PR-$TRAVIS_PULL_REQUEST_BRANCH ; else echo $TRAVIS_BRANCH ; fi`
+  - if [ "$TAG" == "master" ]; then export TAG="latest"; fi
+  - docker tag $BUILD_IMAGE $BUILD_IMAGE:$TAG
+  - docker push $BUILD_IMAGE:$TAG
+  - echo "docker push done"
+
 
 notifications:
   slack:
