@@ -12,7 +12,7 @@ Package for Ubuntu 16.04 are build on every commit to this repository and upload
 
     sudo echo "deb http://ppa.launchpad.net/ergw/xenial/ubuntu xenial main" > /etc/apt/sources.list.d/ergw-xenial-ppa.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58A14C3D
-    curl -s https://packagecloud.io/install/repositories/ergw/ci/script.deb.sh | sudo bash
+    curl -s https://packagecloud.io/install/repositories/travelping/ergw/script.deb.sh | sudo bash
     apt-get -y install ergw-gtp-c-node
 
 After installation adjust /opt/ergw-gtp-u-node/releases/<version>/sys.config
