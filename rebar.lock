@@ -18,7 +18,7 @@
   2},
  {<<"ergw">>,
   {git,"git://github.com/travelping/ergw",
-       {ref,"55e360a051179c8b767a4cb0a3d170798267e8be"}},
+       {ref,"7c8ca649d93b959c6fc192b822ec6f3a7ecfafca"}},
   0},
  {<<"ergw_aaa">>,
   {git,"git://github.com/travelping/ergw_aaa",
@@ -69,7 +69,10 @@
   {git,"https://github.com/basho/lager.git",
        {ref,"8187757388c9adc915379caaab36a2f2ca26e944"}},
   1},
- {<<"meck">>,{pkg,<<"meck">>,<<"0.8.4">>},1},
+ {<<"meck">>,
+  {git,"https://github.com/eproxus/meck.git",
+       {ref,"10c50634b57d1f7ce5205e2fae56e700c4da3397"}},
+  1},
  {<<"metrics">>,{pkg,<<"metrics">>,<<"1.0.1">>},2},
  {<<"mimerl">>,{pkg,<<"mimerl">>,<<"1.0.2">>},2},
  {<<"netdata">>,
@@ -105,7 +108,6 @@
 {pkg_hash,[
  {<<"certifi">>, <<"861A57F3808F7EB0C2D1802AFEAAE0FA5DE813B0DF0979153CBAFCD853ABABAF">>},
  {<<"idna">>, <<"AC62EE99DA068F43C50DC69ACF700E03A62A348360126260E87F2B54ECED86B2">>},
- {<<"meck">>, <<"59CA1CD971372AA223138EFCF9B29475BDE299E1953046A0C727184790AB1520">>},
  {<<"metrics">>, <<"25F094DEA2CDA98213CECC3AEFF09E940299D950904393B2A29D191C346A8486">>},
  {<<"mimerl">>, <<"993F9B0E084083405ED8252B99460C4F0563E41729AB42D9074FD5E52439BE88">>},
  {<<"ssl_verify_fun">>, <<"28A4D65B7F59893BC2C7DE786DEC1E1555BD742D336043FE644AE956C3497FBE">>}]}

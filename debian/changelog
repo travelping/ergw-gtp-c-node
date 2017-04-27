@@ -1,3 +1,9 @@
+ergw-gtp-c-node (1.11.0-1) unstable; urgency=medium
+
+  * New ergw upstream release 1.11.0
+
+ -- Andreas Schultz <aschultz@warp10.net>  Thu, 27 Apr 2017 15:26:23 +0200
+
 ergw-gtp-c-node (1.10.0-1) unstable; urgency=medium
 
   * New ergw upstream release 1.10.0
