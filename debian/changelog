@@ -1,3 +1,16 @@
+ergw-gtp-c-node (1.13.1-1) unstable; urgency=medium
+
+  * New ergw upstream release 1.13.1
+  * update config with rate limiting
+
+ -- Andreas Schultz <as@travelping.com>  Thu, 20 Jul 2017 16:30:52 +0200
+
+ergw-gtp-c-node (1.12.0-1) unstable; urgency=medium
+
+  * New ergw upstream release 1.12.0
+
+ -- Andreas Schultz <as@travelping.com>  Wed, 21 Jun 2017 12:30:22 +0200
+
 ergw-gtp-c-node (1.11.1-1) unstable; urgency=medium
 
   * upgrade ergw for HTTP API
