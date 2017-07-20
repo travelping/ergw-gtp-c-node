@@ -12,6 +12,8 @@ deploy:
   dist: "ubuntu/xenial"
   skip_cleanup: true
   package_glob: artifacts/*.deb
+  on:
+    branch: master
 
 env:
   global:
