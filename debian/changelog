@@ -1,3 +1,12 @@
+ergw-gtp-c-node (1.15.0-1) unstable; urgency=medium
+
+  * New ergw upstream release 1.15.0
+  * fixes:
+    * APNs are treated as DNS label (case insensitive)
+    * context counter for v1 and v2 path are reported separatly
+
+ -- Andreas Schultz <aschultz@warp10.net>  Wed, 30 Aug 2017 15:25:18 +0200
+
 ergw-gtp-c-node (1.14.0-1) unstable; urgency=medium
 
   * New ergw upstream release 1.14.0
