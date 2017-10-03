@@ -1,3 +1,13 @@
+ergw-gtp-c-node (1.16.0-1) unstable; urgency=medium
+
+  * New ergw upstream release 1.16.0
+  * fixes:
+    * change Modify Bearer Request SGW change detection for RAU/TAU/HO
+    * change session collision detection to take only IMSI or IMEI, not both
+    * implement destination port handling for GTPv2-C triggered request
+
+ -- Andreas Schultz <aschultz@warp10.net>  Tue, 03 Oct 2017 17:23:47 +0200
+
 ergw-gtp-c-node (1.15.0-1) unstable; urgency=medium
 
   * New ergw upstream release 1.15.0
