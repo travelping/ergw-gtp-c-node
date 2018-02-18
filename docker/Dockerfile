@@ -10,6 +10,7 @@ RUN     apk update && apk --no-cache upgrade && \
 		erlang-asn1 erlang-compiler erlang-crypto erlang-dev \
 		erlang-diameter erlang-eunit erlang-hipe erlang-inets \
 		erlang-kernel erlang-parsetools erlang-public-key \
+		erlang-os-mon \
 		erlang-runtime-tools erlang-sasl erlang-ssl erlang-stdlib \
 		erlang-syntax-tools \
 	    gcc \
