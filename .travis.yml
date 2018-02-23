@@ -25,6 +25,7 @@ before_install:
   - docker pull ergw/ergw-docker-build
 
 script:
+  - docker build -t $BUILD_IMAGE -f docker/Dockerfile .
   - mkdir artifacts
   - export SHORT_COMMIT_ID=$(git rev-parse --verify --short $TRAVIS_COMMIT)
   - docker run -v `pwd`:/build ergw/ergw-docker-build
@@ -34,7 +35,6 @@ script:
       dpkg-buildpackage -b -uc -nc &&
       cp ../*deb artifacts
     "
-  - docker build -t $BUILD_IMAGE -f docker/Dockerfile .
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
