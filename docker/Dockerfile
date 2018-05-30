@@ -23,7 +23,7 @@ RUN     wget -O /usr/local/bin/rebar3 https://s3.amazonaws.com/rebar3/rebar3 && 
 		chmod a+x /usr/local/bin/rebar3
 
 ADD     . /build
-RUN     rebar3 as prod,native release
+RUN     rebar3 as prod release
 
 # -- runtime image --
 
@@ -39,7 +39,7 @@ COPY    config/ergw-gtp-c-node.config /etc/ergw-gtp-c-node/
 RUN     mkdir -p /var/lib/ergw/ && \
 		touch /var/lib/ergw/ergw.state
 
-COPY    --from=build-env /build/_build/prod+native/rel/ /opt/
+COPY    --from=build-env /build/_build/prod/rel/ /opt/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD     ["/opt/ergw-gtp-c-node/bin/ergw-gtp-c-node", "foreground"]
