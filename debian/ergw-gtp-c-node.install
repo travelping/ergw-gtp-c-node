@@ -1,2 +1,0 @@
-debian/pre-start.sh etc/ergw-gtp-c-node/
-config/ergw-gtp-c-node.config etc/ergw-gtp-c-node/

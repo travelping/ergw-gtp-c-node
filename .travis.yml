@@ -3,42 +3,20 @@ sudo: required
 services:
   - docker
 
-deploy:
-  provider: packagecloud
-  repository: "ergw"
-  username: "travelping"
-  token:
-    secure: "Mje9gwayOqE3VCT1CrkS1qTstKXSA8Xirt7et4xFcqLETTC1w9EQ15WeAyX0oIzlHmng3dO7F4+hWM37kzd7e32+qgbS89PXsy5ZCPvrUPMU/a9UcGKZu7gcqwM2/YHCB8myELpyS6g4UJeC2g5dEhlDNAxgd7QK8qhHYI1qGFlbmBhWAveAn3HovHSGJn/s5zNNouHNqPgRwbCxNjxMGtpGaCGyUFypCmisbYvB78C6EETNWRDbDwtmMd+RbObgkKwaPGoemvjuoRHdCISvWhU+g2wYFI1WdpGB4O4PZ/dVPSOY/63I2yHmE5RZerFHem4PR3JyI4jL1DAunHc9GTqSFbMhXYYnD10ZxWAS05Y2pfbAR8b1A0LWkC2UiBJf8xLtZsTcqXeG67qu0Jb6GvsLt5lvvMdVuLkjGMptEFWOsQY3MYfeciDRRA+hv4JJR/obzU0AaQdV8U/NX21p8lX7063ceM6i3iMUrrf3Z5vfPNULVn5/cHBwwQrxUEXTeAeA9EGUlpBucix5/GubTi7ByvFfz9h+15Zr1ftmHDYGKWy1rVqA+WCWNHpBvd8pbKrc0LahpuCstzAHOFrXMIts7jSoG673+bPwQO7JZhS83Zf9nrlcj7iWUHPRfWmzfMhE4baq6BjrRzg3grF3zzpVnDKTt92aizqIQL3RFgs="
-  dist: "ubuntu/xenial"
-  skip_cleanup: true
-  package_glob: artifacts/*.deb
-  on:
-    branch: master
-
 env:
   global:
     - BUILD_IMAGE="ergw/ergw-gtp-c-node"
     - DOCKER_USERNAME="ergwci"
     - secure: "dWQgAWw3Z9Yw4L/W9v8nRG1a6LgGzkko8E8PDEFhaHeVl41woB7+bzuydpSs9whdjkwyIzUspCrt5G8s1qUW9w/anoyWYgKZ3PRfEJM5x6+kO/zcJR5n2hzwcKXcPVJSitc864gQJOdO87Rm6sLGtL/fQT/fo15SxZUsQgwF5kRASe0+iKpCo7/lvqjw8q95Qpeadc9+3hM7yPr9rVWLkHK9rczL9QjPqwVOHJdlQEjrdMpopzNmPLTegiFodaxL5m85stCS8Sqd/CxgVw2B8Uz0VqRO4vWR9Rh6tsggtRQEqCNHI+NgzUW1jBCEoAYNZQVMdbBBLrUwd8Hj38Z6SKRtjpd2VNaXxERj2nIiqQHDoSIM4ObQcYqt5P4StFa8e5u5Ukl7e3IACstjKWDvgZly1SwdCV5YK0HIYMMX/lnHnO1no92/dMB9eOM+PnDI/DsQhF6nuCYGF1hyBHutuAlDoPJE5MX82g30ZCSYpsspoHxIukE8oboUx0yMhcFFDcJ3WqbDWlZvXYr7abmhIrqQmStQoWHUk4svTuH8y4+ZLb2cywHZ1wZOhBUqPyvh2AjH1YeFMIl72fuUvOjz5CKYjzCzQ3geEpyyMCU10kGIPMNf4sTMlk4ILIabFixniTk8ZFLwAcoduR8PK6psWdcaHtEw+GwjuITcHW6szVo="
 
-before_install:
-  - docker pull ergw/ergw-docker-build
-
 script:
   - docker build -t $BUILD_IMAGE -f docker/Dockerfile .
-  - mkdir artifacts
-  - export SHORT_COMMIT_ID=$(git rev-parse --verify --short $TRAVIS_COMMIT)
-  - docker run -v `pwd`:/build ergw/ergw-docker-build
-    sh -c "
-      echo \"SHORT_COMMIT_ID=$SHORT_COMMIT_ID\" &&
-      debchange -m -l \"+$TRAVIS_JOB_NUMBER+git$SHORT_COMMIT_ID\" 'Automatically built' &&
-      dpkg-buildpackage -b -uc -nc &&
-      cp ../*deb artifacts
-    "
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - export TAG=`if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ]; then echo PR-$TRAVIS_PULL_REQUEST_BRANCH ; else echo $TRAVIS_BRANCH ; fi`
+  - export TAG=`echo "$TAG" | sed -e 's,/,-,g'`
+  - echo "Docker image $BUILD_IMAGE:$TAG"
   - if [ "$TAG" == "master" ]; then export TAG="latest"; fi
   - docker tag $BUILD_IMAGE $BUILD_IMAGE:$TAG
   - docker push $BUILD_IMAGE:$TAG
