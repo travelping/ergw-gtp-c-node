@@ -12,7 +12,7 @@
   2},
  {<<"ergw">>,
   {git,"git://github.com/travelping/ergw",
-       {ref,"83ed984cf338ffef0a0019839fddf01c48141d12"}},
+       {ref,"80bb042f1594e5f0ce98ba7d30c6eb11e72d0004"}},
   0},
  {<<"ergw_aaa">>,
   {git,"git://github.com/travelping/ergw_aaa",
