@@ -1,19 +1,11 @@
 # -- build-environment --
 # see https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 
-FROM alpine:3.7 AS build-env
+FROM erlang:21.0.3-alpine AS build-env
 
 WORKDIR /build
 RUN     apk update && apk --no-cache upgrade && \
 		apk --no-cache add \
-		erlang \
-		erlang-asn1 erlang-compiler erlang-crypto erlang-dev \
-		erlang-diameter erlang-eunit erlang-hipe erlang-inets \
-		erlang-kernel erlang-parsetools erlang-public-key \
-		erlang-os-mon \
-		erlang-runtime-tools erlang-sasl erlang-ssl erlang-stdlib \
-		erlang-syntax-tools \
-		erlang-observer \
 		gcc \
 		git \
 		libc-dev libc-utils \
@@ -35,12 +27,12 @@ RUN     rebar3 as prod,native release
 
 # -- runtime image --
 
-FROM    alpine:3.7
+FROM alpine:3.8
 
 WORKDIR /
 RUN     apk update && \
 		apk --no-cache upgrade && \
-		apk --no-cache add ncurses-libs libcrypto1.0
+		apk --no-cache add zlib ncurses-libs libcrypto1.0 lksctp-tools
 COPY    docker/docker-entrypoint.sh /
 COPY    config/ergw-gtp-c-node.config /etc/ergw-gtp-c-node/
 
